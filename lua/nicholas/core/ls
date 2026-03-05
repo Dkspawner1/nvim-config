@@ -37,7 +37,6 @@ map("n", "<C-e>", function()
         vim.lsp.buf.format({ async = true })
     end
 end, { desc = "Format file" })
-
 map("v", "<C-e>", function()
     local ok, conform = pcall(require, "conform")
     if ok then
