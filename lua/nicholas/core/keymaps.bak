@@ -25,6 +25,26 @@ map("n", "<leader>sx", "<cmd>close<CR>",    { desc = "Close split" })
 -- Inside Telescope: Enter = open, Ctrl+V = open in vsplit, Ctrl+X = open in hsplit
 map("n", "<C-o>", "<cmd>Telescope find_files<CR>", { desc = "Find files" })
 
+-- Ctrl+Left/Right: CLion-style WORD navigation
+map("n", "<C-Left>", function()
+    local col = vim.fn.col(".")
+    if col == 1 then
+        vim.cmd("normal! ^")
+    else
+        vim.cmd("normal! B")
+    end
+end, { desc = "Prev WORD or BOL" })
+
+map("n", "<C-Right>", function()
+    local col = vim.fn.col(".")
+    local last = vim.fn.col("$") - 1
+    if col >= last then
+        vim.cmd("normal! g_")
+    else
+        vim.cmd("normal! W")
+    end
+end, { desc = "Next WORD or EOL" })
+
 -- Indenting (stay in visual mode)
 map("v", "<", "<gv", { desc = "Indent left" })
 map("v", ">", ">gv", { desc = "Indent right" })
